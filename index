@@ -1,0 +1,38 @@
+<?
+
+// Counter bot Web Scraping.
+
+class AntiBot {
+	
+	public static function defineEmailProtectors (  ) {
+		// Execute before closing <HEAD> tag to create JavaScript Function Definition.
+		?>
+			<script>
+				function gen_mail_to_link ( lhs , rhs , subject ) {
+					document.write( "<a href=\"mailto" );
+					document.write( ":" + lhs + "@" );
+					document.write( rhs );
+					if ( subject ) {
+						document.write( "?subject=" + subject );
+					}
+					document.write( "\">" + lhs + "@" + rhs + "<\/a>" );
+				}
+			</script>
+		<?
+	}
+	
+	public static function runEmailProtector ( $mailbox , $domain , $subject = NULL ) {
+		// Execute where email is to be shown to execute JavaScript Function.
+		?>
+			<script>
+				gen_mail_to_link( '<? echo $mailbox; ?>' , '<? echo $domain; ?>' , '<? echo $subject; ?>' );
+			</script>
+			<noscript>
+				<em>Email address protected by JavaScript. Activate JavaScript to see the email.</em>
+			</noscript>
+		<?
+	}
+	
+}
+
+?>
